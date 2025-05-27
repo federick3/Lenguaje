@@ -18,13 +18,13 @@ public class Compra {
     String distrito;
     int estado;
     int tipoDocumento;
-    int nDocumento;
+    String nDocumento;
     Date fechaCompra;
 
     public Compra() {
     }
 
-    public Compra(String user, String total, String receptor, String direccion, String metodoPago, InputStream comprobante, String codCompra, String departamento, String provincia, String distrito, int estado, int tipoDocumento, int nDocumento, Date fechaCompra) {
+    public Compra(String user, String total, String receptor, String direccion, String metodoPago, InputStream comprobante, String codCompra, String departamento, String provincia, String distrito, int estado, int tipoDocumento, String nDocumento, Date fechaCompra) {
         this.user = user;
         this.total = total;
         this.receptor = receptor;
@@ -137,11 +137,11 @@ public class Compra {
         this.tipoDocumento = tipoDocumento;
     }
 
-    public int getnDocumento() {
+    public String getnDocumento() {
         return nDocumento;
     }
 
-    public void setnDocumento(int nDocumento) {
+    public void setnDocumento(String nDocumento) {
         this.nDocumento = nDocumento;
     }
 

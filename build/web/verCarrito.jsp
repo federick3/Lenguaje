@@ -3,8 +3,9 @@
 <%@ page import="javax.servlet.http.HttpSession" %>
 
 <%
-    String username = (session != null) ? (String) session.getAttribute("usuario") : null;
-    String rol = (session != null) ? (String) session.getAttribute("rol") : null;
+    String nombreUsuario = (session != null && session.getAttribute("nombreUsuario") != null)
+            ? (String) session.getAttribute("nombreUsuario")
+            : null;
 %>
 
 <!DOCTYPE html>
@@ -122,29 +123,29 @@
                     </button>
                     <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavAltMarkup" style="margin-left: 150px;">
                         <div class="navbar-nav mx-auto">
-                            <a class="nav-link active" aria-current="page" href="http://localhost:8080/AgroPiura/home.jsp">INICIO</a>
-                            <a class="nav-link" href="http://localhost:8080/AgroPiura/catProductos.jsp">PRODUCTOS</a>
-                            <a class="nav-link" href="http://localhost:8080/AgroPiura/Nosotros.jsp">NOSOTROS</a>
-                            <a class="nav-link" href="http://localhost:8080/AgroPiura/Contactanos.jsp">CONTÁCTANOS</a>
+                            <a class="nav-link active" aria-current="page" href="http://localhost:8080/Integrador/home.jsp">INICIO</a>
+                            <a class="nav-link" href="http://localhost:8080/Integrador/catProductos.jsp">PRODUCTOS</a>
+                            <a class="nav-link" href="http://localhost:8080/Integrador/Nosotros.jsp">NOSOTROS</a>
+                            <a class="nav-link" href="http://localhost:8080/Integrador/Contactanos.jsp">CONTÁCTANOS</a>
                         </div>
 
                         <div class="d-flex">
-                            <% if (username == null) { %>
+                            <% if (nombreUsuario == null) { %>
                             <li class="nav-item">
-                                <a class="btn btn-primary" href="login.jsp">Iniciar sesión</a>
+                                <a class="btn btn-primary" href="InicioSesion.jsp">Iniciar sesión</a>
                             </li>
                             <% } else {%>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <%= username%>
+                                    <%= nombreUsuario%>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="http://localhost:8080/AgroPiura/Controlador?accion=ListarCompras">Mis compras</a></li>
+                                    <li><a class="dropdown-item" href="http://localhost:8080/Integrador/Controlador?accion=ListarCompras">Mis compras</a></li>
 
-                                    <% if ("administrador".equalsIgnoreCase(rol)) { %>
-                                    <li><a class="dropdown-item" href="Controlador?accion=ListarComprasAdmin">Administrar pedidos</a></li>
-                                    <li><a class="dropdown-item" href="Controlador?accion=admin">Administrar productos</a></li>
-                                    <li><a class="dropdown-item" href="Controlador?accion=ListarSolicitudes">Administrar solicitudes</a></li>
+                                    <% if (nombreUsuario.equals("Administrador")) { %>
+                                    <li><a class="dropdown-item" href="http://localhost:8080/Integrador/Controlador?accion=ListarComprasAdmin">Administrar pedidos</a></li>
+                                    <li><a class="dropdown-item" href="http://localhost:8080/Integrador/Controlador?accion=admin">Administrar productos</a></li>
+                                    <li><a class="dropdown-item" href="http://localhost:8080/Integrador/Controlador?accion=ListarSolicitudes">Administrar solicitudes</a></li>
                                         <% } %>
 
                                     <li><a class="dropdown-item" href="CerrarSesion">Cerrar sesión</a></li>
@@ -296,13 +297,46 @@
             <% }%>
             });
         </script>
+        
+        <script>
+            document.querySelector("form").addEventListener("submit", function (event) {
+                const tipoDocumento = document.getElementById("tipoDocumento").value;
+                const numeroDocumento = document.getElementById("dni").value.trim();
+
+                let error = "";
+
+                // Validaciones según tipo de documento
+                if (tipoDocumento === "1") { // DNI
+                    if (!/^\d{8}$/.test(numeroDocumento)) {
+                        error = "El DNI debe contener exactamente 8 números.";
+                    }
+                } else if (tipoDocumento === "2") { // RUC
+                    if (!/^\d{11}$/.test(numeroDocumento)) {
+                        error = "El RUC debe contener exactamente 11 números.";
+                    }
+                } else if (tipoDocumento === "3") { // Otro
+                    if (!/^\d{11}$/.test(numeroDocumento)) {
+                        error = "El documento ingresado debe contener almenos 11 digitos";
+                    }
+                } else {
+                    error = "Debes seleccionar un tipo de documento.";
+                }
+
+                // Si hay un error, prevenir envío y mostrar alerta
+                if (error !== "") {
+                    event.preventDefault(); // Detiene el envío del formulario
+                    alert(error);
+                    document.getElementById("dni").focus();
+                }
+            });
+        </script>
 
 
         <footer>
             <div style="display: flex; justify-content: space-around; margin: auto;">
 
                 <div style="flex: 1; text-align: center; margin-left: 125px;">
-                    <img src="assets/logo-blanco2.png" alt="AgroPiura" style="max-width: 300px; margin-bottom: 15px;">
+                    <img src="assets/logo.png" alt="AgroPiura" style="max-width: 300px; margin-bottom: 15px;">
                 </div>
 
                 <div style="flex: 1; padding: 0 15px;">
