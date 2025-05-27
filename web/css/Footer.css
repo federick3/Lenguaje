@@ -1,0 +1,24 @@
+/* Asegura que el body y html ocupen toda la altura */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* El contenedor principal debe ocupar todo el espacio disponible */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main toma el espacio disponible entre el header y el footer */
+main {
+    flex: 1;
+}
+
+/* Footer siempre en la parte inferior */
+footer {
+    background-color: #004b23;
+    color: #fff;
+    padding: 40px 0;
+    font-family: Arial, sans-serif;
+}
