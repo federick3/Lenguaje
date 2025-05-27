@@ -3,9 +3,8 @@
 <%@ page import="javax.servlet.http.HttpSession" %>
 
 <%
-    String nombreUsuario = (session != null && session.getAttribute("nombreUsuario") != null)
-            ? (String) session.getAttribute("nombreUsuario")
-            : null;
+    String username = (session != null) ? (String) session.getAttribute("usuario") : null;
+    String rol = (session != null) ? (String) session.getAttribute("rol") : null;
 %>
 
 <!DOCTYPE html>
@@ -130,22 +129,22 @@
                         </div>
 
                         <div class="d-flex">
-                            <% if (nombreUsuario == null) { %>
+                            <% if (username == null) { %>
                             <li class="nav-item">
-                                <a class="btn btn-primary" href="InicioSesion.jsp">Iniciar sesión</a>
+                                <a class="btn btn-primary" href="login.jsp">Iniciar sesión</a>
                             </li>
                             <% } else {%>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <%= nombreUsuario%>
+                                    <%= username%>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="http://localhost:8080/Integrador/Controlador?accion=ListarCompras">Mis compras</a></li>
+                                    <li><a class="dropdown-item" href="http://localhost:8080/AgroPiura/Controlador?accion=ListarCompras">Mis compras</a></li>
 
-                                    <% if (nombreUsuario.equals("Administrador")) { %>
-                                    <li><a class="dropdown-item" href="http://localhost:8080/Integrador/Controlador?accion=ListarComprasAdmin">Administrar pedidos</a></li>
-                                    <li><a class="dropdown-item" href="http://localhost:8080/Integrador/Controlador?accion=admin">Administrar productos</a></li>
-                                    <li><a class="dropdown-item" href="http://localhost:8080/Integrador/Controlador?accion=ListarSolicitudes">Administrar solicitudes</a></li>
+                                    <% if ("administrador".equalsIgnoreCase(rol)) { %>
+                                    <li><a class="dropdown-item" href="Controlador?accion=ListarComprasAdmin">Administrar pedidos</a></li>
+                                    <li><a class="dropdown-item" href="Controlador?accion=admin">Administrar productos</a></li>
+                                    <li><a class="dropdown-item" href="Controlador?accion=ListarSolicitudes">Administrar solicitudes</a></li>
                                         <% } %>
 
                                     <li><a class="dropdown-item" href="CerrarSesion">Cerrar sesión</a></li>
@@ -297,7 +296,7 @@
             <% }%>
             });
         </script>
-        
+
         <script>
             document.querySelector("form").addEventListener("submit", function (event) {
                 const tipoDocumento = document.getElementById("tipoDocumento").value;
