@@ -42,7 +42,7 @@ public class CompraDAO {
             ps.setString(9, compra.getProvincia());
             ps.setString(10, compra.getDistrito());
             ps.setInt(11, compra.getTipoDocumento());
-            ps.setInt(12, compra.getnDocumento());
+            ps.setString(12, compra.getnDocumento());
             ps.setDate(13, new java.sql.Date(System.currentTimeMillis())); // Establecer fecha actual
 
             ps.executeUpdate(); // Ejecutar la consulta
@@ -96,7 +96,7 @@ public class CompraDAO {
                 compra.setProvincia(rs.getString("Provincia"));
                 compra.setDistrito(rs.getString("Distrito"));
                 compra.setTipoDocumento(rs.getInt("TipoDocumento"));
-                compra.setnDocumento(rs.getInt("nDocumento"));
+                compra.setnDocumento(rs.getString("nDocumento"));
                 compra.setFechaCompra(rs.getDate("fechaCompra"));
 
                 System.out.println("Compra encontrada en la base de datos con codCompra: " + codCompra); // Confirma si se encuentra
@@ -144,7 +144,7 @@ public class CompraDAO {
                 compra.setProvincia(rs.getString("Provincia"));
                 compra.setDistrito(rs.getString("Distrito"));
                 compra.setTipoDocumento(rs.getInt("TipoDocumento"));
-                compra.setnDocumento(rs.getInt("nDocumento"));
+                compra.setnDocumento(rs.getString("nDocumento"));
                 compra.setFechaCompra(rs.getDate("fechaCompra")); // Extraer la fecha de compra
 
                 compras.add(compra); // Agregar a la lista
@@ -190,7 +190,7 @@ public class CompraDAO {
                 compra.setProvincia(rs.getString("Provincia"));
                 compra.setDistrito(rs.getString("Distrito"));
                 compra.setTipoDocumento(rs.getInt("TipoDocumento"));
-                compra.setnDocumento(rs.getInt("nDocumento"));
+                compra.setnDocumento(rs.getString("nDocumento"));
                 compra.setFechaCompra(rs.getDate("fechaCompra")); // Extraer la fecha de compra
 
                 compras.add(compra); // Agregar a la lista
@@ -263,7 +263,7 @@ public class CompraDAO {
                 compra.setProvincia(rs.getString("Provincia"));
                 compra.setDistrito(rs.getString("Distrito"));
                 compra.setTipoDocumento(rs.getInt("TipoDocumento"));
-                compra.setnDocumento(rs.getInt("nDocumento"));
+                compra.setnDocumento(rs.getString("nDocumento"));
                 compra.setFechaCompra(rs.getDate("fechaCompra"));
                 compras.add(compra);
             }
@@ -313,7 +313,7 @@ public class CompraDAO {
                 compra.setProvincia(rs.getString("Provincia"));
                 compra.setDistrito(rs.getString("Distrito"));
                 compra.setTipoDocumento(rs.getInt("TipoDocumento"));
-                compra.setnDocumento(rs.getInt("nDocumento"));
+                compra.setnDocumento(rs.getString("nDocumento"));
                 compra.setFechaCompra(rs.getDate("fechaCompra"));
                 compras.add(compra);
             }

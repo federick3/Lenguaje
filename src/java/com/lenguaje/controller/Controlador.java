@@ -341,7 +341,7 @@ public class Controlador extends HttpServlet {
                     String receptor = request.getParameter("receptor");
                     String direccion = request.getParameter("direccion");
                     String metodoPago = request.getParameter("metodoPago");
-                    int numDocumento = Integer.parseInt(request.getParameter("dni"));
+                    String numDocumento =request.getParameter("dni");
                     int tipoDocumento = Integer.parseInt(request.getParameter("tipoDocumento"));
                     String departamento = request.getParameter("departamento");
                     String provincia = request.getParameter("provincia");
@@ -430,7 +430,6 @@ public class Controlador extends HttpServlet {
                     // Obtener detalles de la compra
                     List<DetalleCompra> detalles = detalleCompraDAO.obtenerDetallesPorCompraId(idCompraGenerada);
                     request.setAttribute("detalles", detalles);
-
                     request.setAttribute("id_transaccion", compraGuardada.getCodCompra());
                     request.setAttribute("estado", compraGuardada.getEstado());
                     request.setAttribute("total", compraGuardada.getTotal());
@@ -465,7 +464,7 @@ public class Controlador extends HttpServlet {
                 String CodCompra = request.getParameter("CodCompra");
                 Compra compraGuardada = compraDAO.obtenerCompraPorCodigo(CodCompra);
                 List<DetalleCompra> detalles = detalleDAO.obtenerDetallesPorCodCompra(CodCompra);
-                request.setAttribute("detalles", detalles);
+                    request.setAttribute("detalles", detalles);
                 request.setAttribute("id_transaccion", compraGuardada.getCodCompra());
                 request.setAttribute("estado", compraGuardada.getEstado());
                 request.setAttribute("total", compraGuardada.getTotal());
